@@ -35,9 +35,41 @@ class DegreeCertificate(FPDF):
         return self.output(dest='S').encode('latin-1')
 
 # --- STREAMLIT UI ---
+st.set_page_config(page_title="Degree Generator", layout="centered")
 st.title("🎓 Certificate Generator")
 
 with st.form("cert_form"):
     college = st.text_input("University/College Name", "RMC Institute of Technology")
     name = st.text_input("Student Name")
-    degree = st.selectbox("Degree", ["B.Tech", "
+    degree = st.selectbox("Degree", ["B.Tech", "M.Tech", "B.Sc", "MBA", "Diploma"])
+    subject = st.text_input("Specialization", "Civil Engineering")
+    submit = st.form_submit_button("Generate Certificate")
+
+if submit:
+    if name:
+        data = {
+            'college': college, 
+            'name': name, 
+            'degree': degree, 
+            'subject': subject, 
+            'date': "01-02-2026"
+        }
+        
+        pdf_gen = DegreeCertificate()
+        pdf_bytes = pdf_gen.generate_degree(data)
+        
+        # --- PDF PREVIEW LOGIC ---
+        base64_pdf = base64.b64encode(pdf_bytes).decode('utf-8')
+        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="900" type="application/pdf"></iframe>'
+        
+        st.subheader("👀 Certificate Preview")
+        st.markdown(pdf_display, unsafe_allow_html=True)
+        
+        st.download_button(
+            label="📥 Download Final PDF", 
+            data=pdf_bytes, 
+            file_name=f"{name}_Certificate.pdf",
+            mime="application/pdf"
+        )
+    else:
+        st.error("Bhai, Student ka naam toh dalo!")
