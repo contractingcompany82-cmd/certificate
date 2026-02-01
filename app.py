@@ -81,7 +81,7 @@ st.title("🎓 Academic Certificate ERP")
 st.markdown("---")
 
 with st.form("degree_form"):
-    college = st.text_input("College/University Name", "Indian Institute of Technology")
+    college = st.text_input("College/University Name", "Monard University Ghaziabad")
     
     col1, col2 = st.columns(2)
     with col1:
