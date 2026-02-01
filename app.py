@@ -40,4 +40,4 @@ class SalaryPDF(FPDF):
         self.set_draw_color(0, 102, 204)
         self.rect(130, 230, 60, 25)
         self.set_xy(130, 232)
-        self.set_font('Arial', 'B',
+        self.set_font('Arial', 'B', 8
