@@ -40,4 +40,9 @@ class SalaryPDF(FPDF):
         self.set_draw_color(0, 102, 204)
         self.rect(130, 230, 60, 25)
         self.set_xy(130, 232)
-        self.set_font('Arial', 'B', 8
+        self.set_font('Arial', 'B', 8)
+        self.set_text_color(0, 102, 204)
+        self.cell(60, 5, "DIGITALLY SIGNED", 0, 1, 'C')
+        # Yahan line 43 fix kar di gayi hai:
+        self.set_font('Arial', '', 7) 
+        self.cell(60
